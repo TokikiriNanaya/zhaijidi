@@ -9,7 +9,7 @@ token填写到config.yaml中
 
    ![image.png](assets/HttpCanary01.png)
 
-   随便选一个包，选择请求，预览，找到token（没有token就换个请求）
+   随便选个贴子，点个赞，然后回到这里使用了HttpCanary，选择刚刚点赞抓到的包，预览，找到token
 
    ![36ed38cb024d2c3d22b63a10248170a8_720.jpg](assets/HttpCanary02.png)
 2. PC浏览器抓包（会与手机宅基地相互挤号，因此不推荐，作为方法1无法使用时的下位）
