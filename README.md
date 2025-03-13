@@ -12,9 +12,9 @@ token填写到config.yaml中
    随便选一个包，选择请求，预览，找到token（没有token就换个请求）
 
    ![36ed38cb024d2c3d22b63a10248170a8_720.jpg](assets/HttpCanary02.png)
-
 2. PC浏览器抓包（会与手机宅基地相互挤号，因此不推荐，作为方法1无法使用时的下位）
-   进入http://300zjdclient.tygms.cn/，使用手机验证码登录
+   进入[http://300zjdclient.tygms.cn/]
+   使用手机验证码登录
    ![img.png](assets/img.png)
    然后按f12，依次点击“应用”，“本地存储空间”，找到ClientToken，复制value（注意，不需要双引号）
    ![img_1.png](assets/img_1.png)
