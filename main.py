@@ -137,7 +137,7 @@ def sign_in(token, unique_id):
     headers = get_headers()
 
     data = {
-        "msgid": 1072,
+        "msgid": 1073,
         "unique_id": unique_id,
         "token": token
     }
@@ -155,6 +155,27 @@ def claim_rewards(token, unique_id, task_id_list):
         "msgid": 1074,
         "unique_id": unique_id,
         "task_id_list": task_id_list,
+        "token": token
+    }
+
+    response = session.post(url, headers=headers, json=data)
+    return response.text
+
+
+# 评论请求
+def comment_post(token, unique_id, posts_id, content):
+    url = "https://300zjd.tygms.cn/"
+    headers = get_headers()
+
+    data = {
+        "msgid": 1028,
+        "unique_id": unique_id,
+        "posts_id": posts_id,
+        "content": content,
+        "imgs": "",
+        "links": {},
+        "ats": {},
+        "extras": {},
         "token": token
     }
 
@@ -210,11 +231,16 @@ if __name__ == "__main__":
         print("取消关注响应:", follow_response)
         time.sleep(1)  # 延迟1秒
 
-        # 签到示例
+        # 签到
         sign_in_response = sign_in(token, unique_id)
         print("签到响应:", sign_in_response)
         time.sleep(1)  # 延迟1秒
 
-        # 一键领取示例
+        # 回帖
+        comment_post_response = comment_post(token, unique_id, "6697", "嘤嘤嘤\\n")
+        print("回帖响应:", comment_post_response)
+        time.sleep(1)  # 延迟1秒
+
+        # 一键领取
         claim_response = claim_rewards(token, unique_id, "1,2,3,4,5,6,7,8,9")
         print("一键领取响应:", claim_response)
