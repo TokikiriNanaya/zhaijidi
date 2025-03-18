@@ -22,6 +22,13 @@ def load_config(file_path):
         return yaml.safe_load(config_file)
 
 
+def get_current_time():
+    """
+    返回当前时间的字符串，格式：YYYY-MM-DD HH:MM:SS
+    """
+    return datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+
 # 获取请求头
 def get_headers():
     return {
@@ -172,11 +179,11 @@ def comment_post(token, unique_id, posts_id, content):
         "msgid": 1028,
         "unique_id": unique_id,
         "posts_id": posts_id,
-        "content": content,
+        "content": f"{content}",
         "imgs": "",
-        "links": {},
-        "ats": {},
-        "extras": {},
+        "links": "{}",
+        "ats": "{}",
+        "extras": "{}",
         "token": token
     }
 
@@ -194,16 +201,16 @@ def create_post(token, unique_id, title, tabs_id, brief, content):
         "unique_id": unique_id,
         "title": title,
         "tabs_id": tabs_id,
-        "brief": brief,
-        "content": content,
+        "brief": f"{brief}",
+        "content": f"{content}",
         "imgs": "",
-        "links": {},
+        "links": "{}",
         "topics": "",
         "is_open": True,
-        "ats": {},
+        "ats": "{}",
         "from_post": 0,
         "is_vote": False,
-        "extras": {},
+        "extras": "{}",
         "token": token
     }
 
@@ -258,8 +265,7 @@ def create_and_delete_post(token, unique_id, title, tabs_id, brief, content):
     if response_data["RES"] == 0 and "MSG" in response_data:
         posts_id = response_data["MSG"]["Posts_Id"]
         print(f"发帖成功，帖子ID: {posts_id}")
-
-        # 等待10秒后删除帖子
+        print("等待10秒后删除帖子...")
         time.sleep(10)
         delete_response = delete_post(token, posts_id)
         print(f"删除帖子响应: {delete_response}")
@@ -269,7 +275,7 @@ def create_and_delete_post(token, unique_id, title, tabs_id, brief, content):
 
 # 主程序
 if __name__ == "__main__":
-    print("########## 脚本开始执行！ ##########")
+    print("########## 脚本开始执行！ ##########", get_current_time())
     config = load_config('config.yaml')
     token = config['token']
 
@@ -322,19 +328,18 @@ if __name__ == "__main__":
         time.sleep(1)  # 延迟1秒
 
         # 回帖
-        comment_post_response = comment_post(token, unique_id, 8403, "嘤嘤嘤\\n")
+        comment_post_response = comment_post(token, unique_id, 8403, get_current_time())
         print("回帖响应:", comment_post_response)
         time.sleep(1)  # 延迟1秒
 
         # 发帖并删除
-        current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         create_and_delete_post(
             token=token,
             unique_id=unique_id,
-            title=f"{current_time}",
+            title=get_current_time(),
             tabs_id=401,
-            brief="这是一个任务贴子\n",
-            content="这是一个任务贴子\n"
+            brief="这是一个任务贴子",
+            content="这是一个任务贴子"
         )
         time.sleep(1)  # 延迟1秒
 
@@ -349,4 +354,4 @@ if __name__ == "__main__":
 
         # 这里可以统计执行成功和失败的项目 失败的重新执行 但是我懒得做了 定时一个小时跑一遍得了
         time.sleep(1)  # 延迟1秒
-        print("########## 脚本全部执行完毕！ ##########")
+        print("########## 脚本全部执行完毕！ ##########", get_current_time())
