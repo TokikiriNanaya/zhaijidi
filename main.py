@@ -235,18 +235,14 @@ def delete_post(token, post_id, delete_type=1):
 
 
 # 浏览贴子请求
-def view_post(unique_id, posts_id, post_unique_id="", view_type=0, page=1, reply_id=0):
+def view_post(unique_id, post_id):
     url = "https://300zjd.tygms.cn/"
     headers = get_headers()
 
     data = {
-        "msgid": 1036,
+        "msgid": 1056,
         "unique_id": unique_id,
-        "posts_id": posts_id,
-        "post_unique_id": post_unique_id,
-        "type": view_type,
-        "page": page,
-        "reply_id": reply_id
+        "post_id": post_id
     }
 
     response = session.post(url, headers=headers, json=data)
@@ -344,7 +340,7 @@ if __name__ == "__main__":
         time.sleep(1)  # 延迟1秒
 
         # 浏览贴子
-        response = view_post(unique_id=unique_id, posts_id=8403)
+        response = view_post(unique_id=unique_id, post_id=8403)
         print("浏览贴子响应:", response)
         time.sleep(1)  # 延迟1秒
 
