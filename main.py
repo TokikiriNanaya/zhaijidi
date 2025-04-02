@@ -345,8 +345,10 @@ if __name__ == "__main__":
         time.sleep(1)  # 延迟1秒
 
         # 一键领取
-        claim_response = claim_rewards(token, unique_id, "1,2,3,4,5,6,7,8,9")
-        print("一键领取响应:", claim_response)
+        for i in range(1, 10):
+            claim_response = claim_rewards(token, unique_id, f"{i}")
+            print(f"领取任务id为{i}的任务奖励: {claim_response}")
+            time.sleep(1)  # 延迟1秒
 
         # 这里可以统计执行成功和失败的项目 失败的重新执行 但是我懒得做了 定时一个小时跑一遍得了
         time.sleep(1)  # 延迟1秒
